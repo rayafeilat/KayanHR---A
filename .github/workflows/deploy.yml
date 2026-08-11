@@ -1,4 +1,4 @@
-ame: Docker Deployment Pipeline
+name: Docker Deployment Pipeline
 
 on:
   push:
