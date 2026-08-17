@@ -16,7 +16,7 @@ jobs:
 
       - name: Build new docker iamge
         run: |
-          docker build -t select_app:latest . # coonect to local host to the other user
+          sudo docker build -t select_app:latest . # coonect to local host to the other user
 
       - name: Trigger root deployment
         run: |
