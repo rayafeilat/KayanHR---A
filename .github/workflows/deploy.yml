@@ -24,7 +24,7 @@ jobs:
 
       - name: Trigger root deployment/ docker-compose
         run: |
-          docker compose up --build
+          docker compose up -d
           #ssh-keyscan -H localhost >> ~/.ssh/known_hosts #update commands here 
           #ssh root@localhost << 'EOF'
            # echo "Stopping old container..."
