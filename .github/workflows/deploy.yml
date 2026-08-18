@@ -17,8 +17,12 @@ jobs:
       - name: Build new docker iamge
         run: |
           docker build -t final_select:latest . # coonect to local host to the other user
+      - name: clean up exisiting containers
+        run: |
+          docker compose down || true
+          docker system prune -f
 
-      - name: Trigger root deployment
+      - name: Trigger root deployment/ docker-compose
         run: |
           docker compose up --build
           #ssh-keyscan -H localhost >> ~/.ssh/known_hosts #update commands here 
