@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:17
+    container_name: postgres_container
+    environment:
+     -  POSTGRES_USER=raya
+     -  POSTGRES_PASSWORD=raya123
+     -  POSTGRES_DB=kayandb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raya -d kayandb"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+  flask_api:
+    build: .
+    container_name: flask_container
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://raya:raya123@postgres_db/kayandb
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+  nginx_proxy:
+    image: nginx:alpine
+    container_name: nginx_container
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - flask_api
+volumes:
+  pg-data:
