@@ -16,7 +16,7 @@ jobs:
 
       - name: Build new docker iamge
         run: |
-          docker build -t final_select:latest /home/raya-feilat/flask_4postgres/flask_venv/Dockerfile # coonect to local host to the other user
+          docker build -t final_select:latest . # coonect to local host to the other user
 
       - name: Trigger root deployment
         run: |
