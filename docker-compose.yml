@@ -1,8 +1,8 @@
-version: '3.8'
+#version: '3.8'
 
 services:
   postgres_db:
-    image: postgres:17
+    image: postgres:17-alpine
     container_name: postgres_container
     environment:
      -  POSTGRES_USER=raya
@@ -28,6 +28,7 @@ services:
       postgres_db:
         condition: service_healthy
   nginx_proxy:
+    #build: .
     image: nginx:alpine
     container_name: nginx_container
     ports:
